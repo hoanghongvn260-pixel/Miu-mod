@@ -18,31 +18,11 @@
         <h3>🛒 Mua Key Tự Động</h3>
         <p>STK: <strong>0965766062</strong> (MBBank)</p>
         <p>Chủ TK: <strong>Nguyen Tien Phong</strong></p>
-        <button onclick="copySTK()">Sao chép STK</button>
+        <button onclick="navigator.clipboard.writeText('0965766062');window.Telegram.WebApp.showAlert('Đã sao chép STK!');">Sao chép STK</button>
     </div>
     <div class="card">
         <h3>🔗 Lấy Link Vượt</h3>
-        <button onclick="getLink()">Mở Link Vượt Key</button>
+        <button onclick="let tg=window.Telegram.WebApp; tg.expand(); let id=tg.initDataUnsafe?.user?.id; if(!id){tg.showAlert('Vở lòng mở trên Telegram!');return;} window.Telegram.WebApp.openLink('https://link4m.co/st?api=68b2988438d8cc2a1f108c6d&url='+encodeURIComponent('https://script.google.com/macros/s/AKfycbyqCSCk8Ek4_l9RKfJV20qMisVT-20YkLx2LJXxImJqjiss04nxL1CODHCrCbTmdmVJBQ/exec?chat_id='+id));">Mở Link Vượt Key</button>
     </div>
-    <script>
-        const tg = window.Telegram.WebApp;
-        tg.expand();
-        function copySTK() {
-            navigator.clipboard.writeText("0965766062");
-            tg.showAlert("Đã sao chép số tài khoản!");
-        }
-        function getLink() {
-            const userId = tg.initDataUnsafe?.user?.id;
-            if (!userId) {
-                tg.showAlert("Vui lòng mở ứng dụng trực tiếp trên Telegram!");
-                return;
-            }
-            const part1 = "https://script.google.com/macros/s/";
-            const part2 = "AKfycbwqNsYEzwxYES0PIOeEj7vFMlmMkEQrWLZYoWrPw7eWJ5uMGWVuMD6Yx_q6PeeKV-Xpw/exec";
-            const scriptUrl = part1 + part2 + "?chat_id=" + userId;
-            const link4mUrl = "https://link4m.co/st?api=68b2988438d8cc2a1f108c6d&url=" + encodeURIComponent(scriptUrl);
-            tg.openLink(link4mUrl);
-        }
-    </script>
 </body>
 </html>
