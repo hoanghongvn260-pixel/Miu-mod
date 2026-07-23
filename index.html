@@ -37,7 +37,17 @@
             tg.showAlert("Đã sao chép số tài khoản!");
         }
 
-        function getLink() {
+        function getLink() { function getLink() {
+    const userId = tg.initDataUnsafe?.user?.id;
+    if (!userId) {
+        tg.showAlert("Vui lòng mở ứng dụng trực tiếp trên Telegram!");
+        return;
+    }
+    const scriptUrl = "https://script.google.com/macros/s/AKfycbyvdbGEJjjGIAobTIiC0DG7Dl4TaxnzvQ04A37o5ADhOjEeP1duxsxX1JtkYvszLjOIGQ/exec?chat_id=" + userId;
+    const link4mUrl = "https://link4m.co/st?api=68b2988438d8cc2a1f108c6d&url=" + encodeURIComponent(scriptUrl);
+    tg.openLink(link4mUrl);
+}
+
             tg.openLink("https://link4m.co/st?api=68b2988438d8cc2a1f108c6d&url=yourdestinationlink.com");
         }
     </script>
