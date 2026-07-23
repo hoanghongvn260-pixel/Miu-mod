@@ -8,21 +8,52 @@
     <style>
         body { font-family: Arial, sans-serif; text-align: center; background: #f4f4f9; padding: 20px; }
         .card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        button { background: #0088cc; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button { background: #0088cc; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; width: 100%; }
         button:hover { background: #006699; }
+        .badge { background: #ff9800; color: white; padding: 3px 8px; border-radius: 12px; font-size: 14px; font-weight: bold; }
     </style>
 </head>
 <body>
     <h2>🚀 Miumod Key Store</h2>
+    
     <div class="card">
         <h3>🛒 Mua Key Tự Động</h3>
         <p>STK: <strong>0965766062</strong> (MBBank)</p>
         <p>Chủ TK: <strong>Nguyen Tien Phong</strong></p>
-        <button onclick="navigator.clipboard.writeText('0965766062');window.Telegram.WebApp.showAlert('Đã sao chép STK!');">Sao chép STK</button>
+        <button onclick="navigator.clipboard.writeText('0965766062');window.Telegram.WebApp.showAlert('Đã sao chép STK!');" style="background:#28a745;">Sao chép STK</button>
     </div>
+
     <div class="card">
-        <h3>🔗 Lấy Link Vượt</h3>
-        <button onclick="let tg=window.Telegram.WebApp; tg.expand(); let id=tg.initDataUnsafe?.user?.id; if(!id){tg.showAlert('Vui lòng mở trên Telegram!');return;} window.Telegram.WebApp.openLink('https://link4m.co/st?api=68b2988438d8cc2a1f108c6d&url='+encodeURIComponent('https://script.google.com/macros/s/AKfycbyC8VNqsBNx2hr9SeICLBMXKJJIWJqQN5znSyT3AqDxbAQo5oZqw9ue2OiKmA9rA56n/exec?chat_id='+id));">Mở Link Vượt Key</button>
+        <h3>🔗 Lấy Link Vượt Key</h3>
+        <p>Kho hiện tại còn: <span id="keyCount" class="badge">Đang tải...</span> Key</p>
+        <button onclick="getLink()">Mở Link Vượt Key</button>
     </div>
+
+    <script>
+        const scriptExecUrl = "https://script.google.com/macros/s/AKfycbyC8VNqsBNx2hr9SeICLBMXKJJIWJqQN5znSyT3AqDxbAQo5oZqw9ue2OiKmA9rA56n/exec";
+
+        // Tự động gọi sang Google Apps Script để lấy số lượng key khi vừa mở web
+        fetch(scriptExecUrl + "?action=count")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("keyCount").innerText = data.trim();
+            })
+            .catch(error => {
+                document.getElementById("keyCount").innerText = "Lỗi";
+            });
+
+        function getLink() {
+            let tg = window.Telegram.WebApp;
+            tg.expand();
+            let id = tg.initDataUnsafe?.user?.id;
+            if (!id) {
+                tg.showAlert("Vui lòng mở trên ứng dụng Telegram!");
+                return;
+            }
+            let destinationUrl = scriptExecUrl + "?chat_id=" + id;
+            let link4mUrl = "https://link4m.co/st?api=68b2988438d8cc2a1f108c6d&url=" + encodeURIComponent(destinationUrl);
+            tg.openLink(link4mUrl);
+        }
+    </script>
 </body>
 </html>
