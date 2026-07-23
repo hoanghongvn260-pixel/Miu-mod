@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miumod Mini App</title>
+    <!-- Thư viện Telegram Web App SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background: #f4f4f9; color: #333; }
+        .card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        button { background: #0088cc; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-size: 16px; cursor: pointer; width: 100%; }
+        button:hover { background: #006699; }
+    </style>
+</head>
+<body>
+    <h2>🚀 Miumod Key Store</h2>
+    
+    <div class="card">
+        <h3>🛒 Mua Key Tự Động</h3>
+        <p>STK: <strong>0965766062</strong> (MBBank)</p>
+        <p>Chủ TK: <strong>Nguyen Tien Phong</strong></p>
+        <button onclick="copySTK()">Sao chép STK</button>
+    </div>
+
+    <div class="card">
+        <h3>🔗 Lấy Link Vượt</h3>
+        <button onclick="getLink()">Mở Link Vượt Key</button>
+    </div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Mở tràn màn hình
+
+        function copySTK() {
+            navigator.clipboard.writeText("0965766062");
+            tg.showAlert("Đã sao chép số tài khoản!");
+        }
+
+        function getLink() {
+            tg.openLink("https://example.com/vuot-link");
+        }
+    </script>
+</body>
+</html>
