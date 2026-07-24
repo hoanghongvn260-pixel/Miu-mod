@@ -30,10 +30,10 @@
     </div>
 
     <script>
-        // Thay link Google Apps Script của ông vào đây
+        // Link Google Apps Script của ông
         const scriptExecUrl = "https://script.google.com/macros/s/AKfycbyC8VNqsBNx2hr9SeICLBMXKJJIWJqQN5znSyT3AqDxbAQo5oZqw9ue2OiKmA9rA56n/exec";
 
-        // Tự động gọi sang Google Apps Script để lấy số lượng key khi mở web
+        // Tự động load số lượng key hiển thị lên giao diện
         fetch(scriptExecUrl + "?action=count")
             .then(response => response.text())
             .then(data => {
@@ -52,19 +52,12 @@
                 return;
             }
             
-            // Đích cuối cùng: Nhận key từ Google Apps Script
+            // Xấu nối chuỗi vượt kép chuẩn xác với Vượt Nhanh và Link4m
             let destinationUrl = scriptExecUrl + "?chat_id=" + id;
-            
-            // Lớp thứ 3: Link 4m cuối cùng -> Trỏ về Google Apps Script
             let link4mStep2 = "https://link4m.co/st?api=68b2988438d8cc2a1f108c6d&url=" + encodeURIComponent(destinationUrl);
-            
-            // Lớp thứ 2: Sang Vuotnhanh -> Trỏ tiếp sang Link 4m lớp thứ 3
             let vuotNhanhUrl = "https://vuotnhanh.com/st?api=c74b2166-fdb0-4f86-a109-9f299fd369b6&url=" + encodeURIComponent(link4mStep2);
-            
-            // Lớp thứ 1: Link 4m đầu tiên -> Trỏ sang Vuotnhanh
             let link4mStep1 = "https://link4m.co/st?api=68b2988438d8cc2a1f108c6d&url=" + encodeURIComponent(vuotNhanhUrl);
 
-            // Mở chuỗi vượt link bắt đầu từ Link 4m lớp 1
             tg.openLink(link4mStep1);
         }
     </script>
