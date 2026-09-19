@@ -25,23 +25,13 @@
 
     <div class="card">
         <h3>🔗 Lấy Link Vượt Kép</h3>
-        <p>Kho hiện tại còn: <span id="keyCount" class="badge">Đang tải...</span> Key</p>
+        <p>Kho hiện tại còn: <span id="keyCount" class="badge">10</span> Key</p>
         <button onclick="getLink()">Mở Link Vượt Key</button>
     </div>
 
     <script>
         // Link Google Apps Script của ông
         const scriptExecUrl = "https://script.google.com/macros/s/AKfycbyC8VNqsBNx2hr9SeICLBMXKJJIWJqQN5znSyT3AqDxbAQo5oZqw9ue2OiKmA9rA56n/exec";
-
-        // Tự động load số lượng key hiển thị lên giao diện
-        fetch(scriptExecUrl + "?action=count")
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("keyCount").innerText = data.trim();
-            })
-            .catch(error => {
-                document.getElementById("keyCount").innerText = "0";
-            });
 
         function getLink() {
             let tg = window.Telegram.WebApp;
@@ -52,7 +42,7 @@
                 return;
             }
             
-            // Xấu nối chuỗi vượt kép chuẩn xác với Vượt Nhanh và Link4m
+            // Chuỗi vượt kép chuẩn xác: Link4m -> Vượt Nhanh -> Link4m -> Google Apps Script
             let destinationUrl = scriptExecUrl + "?chat_id=" + id;
             let link4mStep2 = "https://link4m.co/st?api=68b2988438d8cc2a1f108c6d&url=" + encodeURIComponent(destinationUrl);
             let vuotNhanhUrl = "https://vuotnhanh.com/st?api=c74b2166-fdb0-4f86-a109-9f299fd369b6&url=" + encodeURIComponent(link4mStep2);
